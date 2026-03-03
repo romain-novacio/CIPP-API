@@ -148,7 +148,7 @@ function Invoke-ExecApiClient {
             if (!$Client) {
                 $Results = @{
                     resultText = 'API client not found'
-                    severity   = 'error'
+                    state      = 'error'
                 }
             } else {
                 $ApiConfig = New-CIPPAPIConfig -ResetSecret -AppId $Request.Body.ClientId -Headers $Request.Headers
@@ -192,7 +192,7 @@ function Invoke-ExecApiClient {
                     $Body = @{ Results = "API client $ClientId not found or not a valid CIPP-API application" }
                 }
             } catch {
-                Write-LogMessage -headers $Request.Headers -API 'ExecApiClient' -message "Failed to remove app registration for $ClientId" -Sev 'Warning'
+                Write-LogMessage -headers $Request.Headers -API 'ExecApiClient' -message "Failed to remove app registration for $ClientId" -sev 'Warn'
             }
         }
         default {
